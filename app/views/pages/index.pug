@@ -1,0 +1,65 @@
+extends ../layout
+
+block content
+  .main-content
+    .container-fluid
+      // OVERVIEW
+      .panel.panel-headline
+        .panel-heading
+          h3.panel-title 概览
+          p.panel-subtitle 日期: Oct 14, 2016 - Oct 21, 2016
+        .panel-body
+          .row
+            .col-md-3
+              .metric
+                span.icon
+                  i.fa.fa-connectdevelop
+                p
+                  span.number 18
+                  span.title 家庭中的的智能设备
+            .col-md-3
+              .metric
+                span.icon
+                  i.fa.fa-server
+                p
+                  span.number 2
+                  span.title 家庭主机
+            .col-md-3
+              .metric
+                span.icon
+                  i.fa.fa-eye
+                p
+                  span.number 274
+                  span.title 登陆次数
+            .col-md-3
+              .metric
+                span.icon
+                  i.fa.fa-bar-chart
+                p
+                  span.number 1002
+                  span.title 产生数据
+          .row
+            .col-md-9
+              #headline-chart.ct-chart
+            .col-md-3
+              .weekly-summary.text-right
+                span.number 25
+                |  
+                span.percentage
+                  i.fa.fa-caret-up.text-success
+                  |  12%
+                span.info-label 平均温度
+              .weekly-summary.text-right
+                span.number 75
+                |  
+                span.percentage
+                  i.fa.fa-caret-up.text-success
+                  |  23%
+                span.info-label 空气质量
+              .weekly-summary.text-right
+                span.number 70
+                |  
+                span.percentage
+                  i.fa.fa-caret-down.text-danger
+                  |  8%
+                span.info-label 湿度
