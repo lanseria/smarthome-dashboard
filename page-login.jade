@@ -1,0 +1,75 @@
+doctype html
+html.fullscreen-bg(lang='en')
+  head
+    title Login | Klorofil - Free Bootstrap Dashboard Template
+    | &#x9;
+    meta(charset='utf-8')
+    | &#x9;
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    | &#x9;
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+    // VENDOR CSS
+    link(rel='stylesheet', href='assets/css/bootstrap.min.css')
+    | &#x9;
+    link(rel='stylesheet', href='assets/vendor/font-awesome/css/font-awesome.min.css')
+    | &#x9;
+    link(rel='stylesheet', href='assets/vendor/linearicons/style.css')
+    // MAIN CSS
+    link(rel='stylesheet', href='assets/css/main.css')
+    // FOR DEMO PURPOSES ONLY. You should remove this in your project
+    link(rel='stylesheet', href='assets/css/demo.css')
+    // GOOGLE FONTS
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700', rel='stylesheet')
+    // ICONS
+    link(rel='apple-touch-icon', sizes='76x76', href='assets/img/apple-icon.png')
+    | &#x9;
+    link(rel='icon', type='image/png', sizes='96x96', href='assets/img/favicon.png')
+  body
+    // WRAPPER
+    #wrapper
+      .vertical-align-wrap
+        .vertical-align-middle
+          .auth-box
+            .left
+              .content
+                .header
+                  .logo.text-center
+                    img(src='assets/img/logo-dark.png', alt='Klorofil Logo')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  p.lead Login to your account
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                form.form-auth-small(action='index.php')
+                  .form-group
+                    label.control-label.sr-only(for='signin-email') Email
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    input#signin-email.form-control(type='email', value='samuel.gold@domain.com', placeholder='Email')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  .form-group
+                    label.control-label.sr-only(for='signin-password') Password
+                    | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                    input#signin-password.form-control(type='password', value='thisisthepassword', placeholder='Password')
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  .form-group.clearfix
+                    label.fancy-checkbox.element-left
+                      input(type='checkbox')
+                      | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                      span Remember me
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  button.btn.btn-primary.btn-lg.btn-block(type='submit') LOGIN
+                  | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                  .bottom
+                    span.helper-text
+                      i.fa.fa-lock
+                      |  
+                      a(href='#') Forgot password?
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            .right
+              .overlay
+              | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+              .content.text
+                h1.heading Free Bootstrap dashboard template
+                | &#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;
+                p by The Develovers
+            | &#x9;&#x9;&#x9;&#x9;&#x9;
+            .clearfix
+    // END WRAPPER

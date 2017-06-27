@@ -8,6 +8,8 @@ var session = require('express-session');
 var mongoose = require('mongoose');
 var mongoStore = require('connect-mongo')(session);
 
+var config = require('./config.js');
+
 var dbUrl = 'mongodb://localhost/smarthome';
 var port = process.env.PORT || 3002;
 
@@ -42,8 +44,7 @@ if('development' === env){
   mongoose.set('debug', true);
 }
 app.locals.moment = require('moment');
-// app.locals.title = config.web.title;
-// app.locals.memu = config.web.memu;
+app.locals.web = config.web;
 
 require('./app/routes/index')(app);
 

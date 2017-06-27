@@ -1,0 +1,109 @@
+extends ../layout
+
+block content
+  .main-content
+    .container-fluid
+      h3.page-title 家庭中传感器数据
+      .row
+        .col-md-6
+          .panel
+            .panel-heading
+              h3.panel-title 室内空气质量
+            .panel-body
+              #air-quality-chart.ct-chart
+        .col-md-6
+          .panel
+            .panel-heading
+              h3.panel-title 温度
+            .panel-body
+              #temp-chart.ct-chart
+      .row
+        .col-md-6
+          .panel
+            .panel-heading
+              h3.panel-title 湿度
+            .panel-body
+              #humidity-chart.ct-chart
+        .col-md-6
+          .panel
+            .panel-heading
+              h3.panel-title 数据比较
+            .panel-body
+              #multiple-chart.ct-chart
+block javascript
+  script(src='assets/vendor/chartist/js/chartist.min.js')
+  script.
+    $(function() {
+    var options;
+    var data = {
+    labels: ['8点', '9点', '10点', '11点', '12点', '13点', '14点'],
+    series: [
+    [23, 25, 24, 26, 25, 28, 29],
+    ]
+    };
+    // line chart
+    options = {
+    height: "270px",
+    showArea: true,
+    showLine: false,
+    showPoint: false,
+    low: 0,
+    axisX: {
+    showGrid: true
+    },
+    lineSmooth: false,
+    };
+    new Chartist.Line('#air-quality-chart', data, options);
+    // bar chart
+    data = {
+    labels: ['8点', '9点', '10点', '11点', '12点', '13点', '14点'],
+    series: [
+    [70, 88, 87, 90, 94, 98, 89],
+    ]
+    };
+    new Chartist.Line('#temp-chart', data, options);
+    // area chart
+    data = {
+    labels: ['8点', '9点', '10点', '11点', '12点', '13点', '14点'],
+    series: [
+    [78, 93, 78, 68, 87, 56, 67],
+    ]
+    };
+    new Chartist.Line('#humidity-chart', data, options);
+    // multiple chart
+    data = {
+    labels: ['8点', '9点', '10点', '11点', '12点', '13点', '14点'],
+    series: [
+    [23, 25, 24, 26, 25, 28, 29],
+    [70, 88, 87, 90, 94, 98, 89],
+    [78, 93, 78, 68, 87, 56, 67],
+    ]
+    };
+    var options = {
+    fullWidth: true,
+    lineSmooth: false,
+    height: "270px",
+    low: 0,
+    high: 'auto',
+    series: {
+    'series-projection': {
+    showArea: true,
+    showPoint: false,
+    showLine: false
+    },
+    },
+    axisX: {
+    showGrid: false,
+    },
+    axisY: {
+    showGrid: false,
+    onlyInteger: true,
+    offset: 0,
+    },
+    chartPadding: {
+    left: 20,
+    right: 20
+    }
+    };
+    new Chartist.Line('#multiple-chart', data, options);
+    });

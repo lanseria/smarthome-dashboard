@@ -63,3 +63,30 @@ block content
                   i.fa.fa-caret-down.text-danger
                   |  8%
                 span.info-label 湿度
+block javascript
+  script(src='/assets/vendor/chartist/js/chartist.min.js')
+  script.
+    $(function() {
+    var data, options;
+    // // headline charts
+    data = {
+    labels: ['8点', '9点', '10点', '11点', '12点', '13点', '14点'],
+    series: [
+    [23, 25, 24, 26, 25, 28, 29],
+    [70, 88, 87, 90, 94, 98, 89],
+    [78, 93, 78, 68, 87, 56, 67],
+    ]
+    };
+    options = {
+    height: 300,
+    showArea: true,
+    showLine: true,
+    showPoint: true,
+    fullWidth: false,
+    axisX: {
+    showGrid: true
+    },
+    lineSmooth: false
+    };
+    new Chartist.Line('#headline-chart', data, options);
+    });
