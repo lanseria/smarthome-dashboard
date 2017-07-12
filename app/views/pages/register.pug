@@ -1,0 +1,51 @@
+doctype html
+html.fullscreen-bg(lang='en')
+  head
+    title 注册 | #{web.title}
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0')
+    // VENDOR CSS
+    link(rel='stylesheet', href='assets/css/bootstrap.min.css')
+    link(rel='stylesheet', href='assets/vendor/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='assets/vendor/linearicons/style.css')
+    // MAIN CSS
+    link(rel='stylesheet', href='assets/css/main.css')
+    // FOR DEMO PURPOSES ONLY. You should remove this in your project
+    link(rel='stylesheet', href='assets/css/demo.css')
+    // GOOGLE FONTS
+    link(href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700', rel='stylesheet')
+    // ICONS
+    link(rel='apple-touch-icon', sizes='76x76', href='assets/img/apple-icon.png')
+    link(rel='icon', type='image/png', sizes='96x96', href='assets/img/favicon.png')
+  body
+    // WRAPPER
+    #wrapper
+      .vertical-align-wrap
+        .vertical-align-middle
+          .auth-box
+            .left
+              .content
+                .header
+                  .logo.text-center
+                    img(src='assets/img/logo-dark.png', alt='Klorofil Logo')
+                  p.lead 注册你的新账户
+                form.form-auth-small(action='/signup', method="post")
+                  .form-group
+                    label.control-label.sr-only(for='signin-email') Email
+                    input#signin-email.form-control(type='email', value='564265135@qq.com', placeholder='Email', name="user[name]")
+                  .form-group
+                    label.control-label.sr-only(for='signin-password') Password
+                    input#signin-password.form-control(type='password', value='000000', placeholder='Password', name="user[password]")
+                  .form-group.clearfix
+                    label.fancy-checkbox.element-left
+                      input(type='checkbox')
+                      span 记住我
+                  button.btn.btn-primary.btn-lg.btn-block(type='submit') 注册
+            .right
+              .overlay
+              .content.text
+                h1.heading #{web.title}
+                p by The Develovers
+            .clearfix
+    // END WRAPPER
