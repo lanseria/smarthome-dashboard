@@ -5,22 +5,22 @@ var config = {
       {
         fa: "lnr-home", 
         name: "概览", 
-        url: '/index',
+        url: 'index',
       }, 
       {
         fa: "lnr-chart-bars", 
         name: "传感器", 
-        url: '/sensors',
+        url: 'sensors',
       }, 
       {
         fa: "lnr-cog", 
         name: "控制器", 
-        url: '/controllers'
+        url: 'controllers'
       }, 
       {
         fa: "lnr-alarm", 
         name: "设备", 
-        url: '/devices'
+        url: 'devices'
       },
     ],
   },

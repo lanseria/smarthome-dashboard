@@ -57,38 +57,49 @@ html(lang='en')
                   li
                     a(href='#') 其它疑问
               li.dropdown
-                a.dropdown-toggle(href='#', data-toggle='dropdown')
-                  img.img-circle(src='/assets/img/user.png', alt='Avatar')
-                  span 用户1
-                  i.icon-submenu.lnr.lnr-chevron-down
-                ul.dropdown-menu
-                  li
-                    a(href='#')
-                      i.lnr.lnr-user
-                      span 个人设置
-                  li
-                    a(href='#')
-                      i.lnr.lnr-envelope
-                      span 信息
-                  li
-                    a(href='#')
-                      i.lnr.lnr-cog
-                      span 设置
-                  li
-                    a(href='/logout')
-                      i.lnr.lnr-exit
-                      span 退出
+                if user
+                  a.dropdown-toggle(href='#', data-toggle='dropdown')
+                    img.img-circle(src='/assets/img/user.png', alt='Avatar')
+                    span #{user.name}
+                    i.icon-submenu.lnr.lnr-chevron-down
+                  ul.dropdown-menu
+                    li
+                      a(href='#')
+                        i.lnr.lnr-user
+                        span 个人设置
+                    li
+                      a(href='#')
+                        i.lnr.lnr-envelope
+                        span 信息
+                    li
+                      a(href='#')
+                        i.lnr.lnr-cog
+                        span 设置
+                    li
+                      a(href='/logout')
+                        i.lnr.lnr-exit
+                        span 退出
+                else
+                  a.dropdown-toggle(href='#', data-toggle='dropdown')
+                    img.img-circle(src='/assets/img/user.png', alt='Avatar')
+                    span 错误
       // END NAVBAR
       // LEFT SIDEBAR
       #sidebar-nav.sidebar
         .sidebar-scroll
           nav
             ul.nav
-              each val in web.menu
-                li
-                  a(class=url==val.url ? 'active' : '', href=val.url)
-                    i.lnr(class=val.fa)
-                    span #{val.name}
+              each val,index in web.menu
+                if(index==0)
+                  li
+                    a(class=(url===val.url||url==='') ? 'active' : '', href=val.url)
+                      i.lnr(class=val.fa)
+                      span #{val.name}
+                else
+                  li
+                    a(class=(url===val.url) ? 'active' : '', href=val.url)
+                      i.lnr(class=val.fa)
+                      span #{val.name}
               li
                 a.collapsed(href='#subPages', data-toggle='collapse')
                   i.lnr.lnr-file-empty
@@ -97,11 +108,13 @@ html(lang='en')
                 #subPages.collapse
                   ul.nav
                     li
-                      a(href='#') Profile
+                      a(href='#') 个人中心
                     li
-                      a(href='/login') Login
+                      a(href='/login') 登录页
                     li
-                      a(href='#') Lockscreen
+                      a(href='#') 锁屏
+                    li
+                      a(href='/devicetype') 类别添加
       // END LEFT SIDEBAR
       // MAIN
       .main

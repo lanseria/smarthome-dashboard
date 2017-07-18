@@ -14,6 +14,10 @@ var UserSchema = new Schema({
   // verified user 1
   // professional user 2
   // super admin >10 >50
+  devices: [{
+    type: ObjectId,
+    ref: 'device'
+  }],
   role: {
     type: Number,
     default: 0
