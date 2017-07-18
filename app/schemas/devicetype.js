@@ -15,7 +15,8 @@ var DevicetypeSchema = new Schema({
     type: ObjectId,
     ref: 'device'
   }],
-	devkey:Number,
+	devkey:String,
+	icon:String,
 	meta:{
 		createAt:{
 			type:Date,

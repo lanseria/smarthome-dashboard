@@ -13,7 +13,13 @@ var DeviceSchema = new Schema({
 	data:[{
     type: ObjectId,
     ref: 'data'
-  }],
+	}],
+	name: {
+		type: String,
+	},
+	devid: {
+		type: String,
+	},
 	meta:{
 		createAt:{
 			type:Date,

@@ -1,0 +1,53 @@
+div.modal.fade#adddevicetype(tabindex="-1", role="dialog", aria-labelledby="adddevicetypeLabel")
+  div.modal-dialog(role="document")
+    .modal-content
+      .modal-header
+        button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+          span(aria-hidden="true") &times;
+        h4(class="modal-title" id="adddevicetypeLabel") 添加设备类别
+      .modal-body
+        form(method="POST", action="")
+          .form-group
+            label.control-label(for="typename") 设备类名
+            input(type="text", class="form-control", name="devicetype[name]")
+          .form-group
+            label.control-label(for="iscontroller") 控制器/传感器
+            select.form-control(name="devicetype[isController]")
+              option(value="0") 传感器
+              option(value="1") 控制器
+          .form-group
+            label.control-label(for="key") key
+            input(type="text", class="form-control", name="devicetype[devkey]")
+          .form-group
+            label.control-label(for="key") icon
+            input(type="text", class="form-control", name="devicetype[icon]")
+          .form-group
+            ul.list-unstyled.row
+              li.col-md-6
+                span.lnr.lnr-home
+                span.cssclass lnr-home
+              li.col-md-6
+                span.lnr.lnr-drop
+                span.cssclass lnr-drop
+              li.col-md-6
+                span.lnr.lnr-cloud
+                span.cssclass lnr-cloud
+              li.col-md-6
+                span.lnr.lnr-camera-video
+                span.cssclass lnr-camera-video
+              li.col-md-6
+                span.lnr.lnr-lighter
+                span.cssclass lnr-lighter
+              li.col-md-6
+                span.lnr.lnr-leaf
+                span.cssclass lnr-leaf
+              li.col-md-6
+                span.lnr.lnr-sun
+                span.cssclass lnr-sun
+          .form-group
+            button(type='submit' class="btn btn-primary") 保存
+      .modal-footer
+        button(type="button" class="btn btn-default" data-dismiss="modal") 关闭
+script(src="/js/jquery.validate.min.js")
+script(src="/js/messages_zh.js")
+script(src="/js/adddevicetype.js")

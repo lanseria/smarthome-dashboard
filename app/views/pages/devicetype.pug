@@ -4,7 +4,7 @@ block content
   .main-content
     .container-fluid
       h3.page-title 设备类别
-      button.btn.btn-primary(type="button", data-toggle="modal", data-target="#adddevice") 添加类别
+      button.btn.btn-primary(type="button", data-toggle="modal", data-target="#adddevicetype") 添加类别
       .panel.panel-headline.demo-icons
         .panel-heading
           h3.panel-title 已有类别
@@ -13,25 +13,9 @@ block content
             a(href='https://linearicons.com/free', target='_blank') https://linearicons.com/free
         .panel-body
           ul.list-unstyled.row
-            li.col-md-2.col-sm-4.col-xs-6
-              span.lnr.lnr-home
-              span.cssclass 主机
-            li.col-md-2.col-sm-4.col-xs-6
-              span.lnr.lnr-drop
-              span.cssclass 温湿度
-            li.col-md-2.col-sm-4.col-xs-6
-              span.lnr.lnr-cloud
-              span.cssclass 新风系统
-            li.col-md-2.col-sm-4.col-xs-6
-              span.lnr.lnr-camera-video
-              span.cssclass 摄像头
-            li.col-md-2.col-sm-4.col-xs-6
-              span.lnr.lnr-lighter
-              span.cssclass 天然气
-            li.col-md-2.col-sm-4.col-xs-6
-              span.lnr.lnr-leaf
-              span.cssclass 空气质量
-            li.col-md-2.col-sm-4.col-xs-6
-              span.lnr.lnr-sun
-              span.cssclass 远程开关
-  include ../includes/modal_adddevice
+            each item in types
+              li.col-md-2.col-sm-4.col-xs-6
+                span.lnr(class=item.icon)
+                span.cssclass #{item.name}
+                span.cssclass #{item.devkey}
+  include ../includes/modal_adddevicetype

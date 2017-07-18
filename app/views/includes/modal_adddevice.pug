@@ -6,7 +6,19 @@ div.modal.fade#adddevice(tabindex="-1", role="dialog", aria-labelledby="adddevic
           span(aria-hidden="true") &times;
         h4(class="modal-title" id="adddeviceLabel") 添加设备
       .modal-body
-      | 这里将添加控件
+        form(method="POST", action="")
+          .form-group
+            label.control-label(for="device[name]") 设备备注
+            input(type="text", class="form-control", name="device[name]")
+          .form-group
+            label.control-label(for="device[devicetype]") 设备类型选择
+            select.form-control(name="device[devicetype]")
+              each devtype in types
+                option(value=devtype._id) #{devtype.name}
+          .form-group
+            label.control-label(for="device[devid]") key
+            input(type="text", class="form-control", name="device[devid]")
+          .form-group
+            button(type='submit' class="btn btn-primary") 保存
       .modal-footer
         button(type="button" class="btn btn-default" data-dismiss="modal") 关闭
-        button(type="button" class="btn btn-primary") 保存

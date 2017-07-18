@@ -22,8 +22,10 @@ module.exports = function(app){
   app.get('/controllers', User.signinRequired, Index.controllers)
 
   app.get('/devices', User.signinRequired, Index.devices)
+  app.post('/devices', User.signinRequired, Index.adddevices)
 
   app.get('/devicetype', User.signinRequired, Index.devicetype)
+  app.post('/devicetype', User.signinRequired, Index.adddevicetype)
 
   app.get('/login', User.login)
 
