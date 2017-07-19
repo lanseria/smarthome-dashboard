@@ -18,6 +18,7 @@ module.exports = function(app){
   app.get('/index', User.signinRequired, Index.index)
 
   app.get('/sensors', User.signinRequired, Index.sensors)
+  app.get('/restfull_sensors', Index.restfull_sensors)
 
   app.get('/controllers', User.signinRequired, Index.controllers)
 

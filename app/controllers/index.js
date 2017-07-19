@@ -11,15 +11,80 @@ exports.index = function(req, res){
 }
 
 exports.sensors = function(req, res){
-  res.render('sensors', {
-
-  });
+  var _user = req.session.user;
+  Devicetype
+  .find({isController: 0})
+  .exec(function(err, devicetypes){
+    var len = devicetypes.length;
+    var sensors = [];
+    devicetypes.forEach(function(dtype){
+      Device
+      .find({devicetype:dtype._id,user:_user._id})
+      .populate('devicetype', 'name')
+      .exec(function(err, devices){
+        if (err) {
+          console.log(err)
+        }
+        sensors.push(...devices)
+        len--;
+        if (len===0) {
+          res.render('sensors', {
+              sensors: sensors
+          });
+        }
+      })
+    })
+  })
 }
 
+exports.restfull_sensors = function(req, res){
+  var devid = req.query.devid;
+  console.log(devid);
+  if (devid===undefined) {
+    return res.send("params error");
+  }
+  Device
+  .findOne({devid: devid})
+  .populate('data', 'meta value status')
+  .exec(function(err, device){
+    var dropcount = device.data.length - 20;
+    var rdata = _.drop(device.data, dropcount);
+    var data = {
+      labels: _.map(_.map(rdata, 'meta.createAt'), second),
+      series: [_.map(rdata, 'value')]
+    }
+    res.send(JSON.stringify(data))
+  })
+  function second(n){
+    return n.getMinutes();
+  }
+}
 exports.controllers = function(req, res){
-  res.render('controllers', {
+ var _user = req.session.user;
+  Devicetype
+  .find({isController: 1})
+  .exec(function(err, devicetypes){
+    var len = devicetypes.length;
+    var controllers = [];
+    devicetypes.forEach(function(dtype){
+      Device
+      .find({devicetype:dtype._id,user:_user._id})
+      .populate('devicetype', 'name')
+      .exec(function(err, devices){
+        if (err) {
+          console.log(err)
+        }
+        controllers.push(...devices)
+        len--;
+        if (len===0) {
+          res.render('controllers', {
+            controllers:controllers
+          });
+        }
+      })
+    })
+  })
 
-  });
 }
 
 exports.devices = function(req, res){

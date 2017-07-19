@@ -11,6 +11,7 @@ var mongoStore = require('connect-mongo')(session);
 
 //-----------------------
 var Data = require('./app/models/data');
+var Device = require('./app/models/device');
 
 //-----------------------
 var option = {
@@ -22,21 +23,44 @@ var network = require('./network/app.js').network;
 var netserver = new network(option);
 
 netserver.start(function(err, server_data){
-  console.info(server_data.toString());
+  // console.info(server_data.toString());
   /**
    * server_data里有硬件控制台的ID
    * 采集的数据datas
    * 时间time
    */
-  var cencontrol_id = 1;
-  var senor_datas = {
-    temperature: 30,
-    humidity: 75
-  };
-  var data_time = new Date();
+  var obj = JSON.parse(server_data.toString());
+  var cid = obj.cid;
+  var datas = obj.data;
+  var time = obj.time;
   //分析完成之后
-  var data = new Data();
-  
+  var Data = require('./app/models/data');
+  var _ = require('lodash');
+  _.forIn(datas, function(val, key){
+    // console.log(val,key);
+    var count = val.length;
+    val.forEach(function(item, index){
+      var _data = item;
+      var data = new Data(_data);
+      data.save(function(err, data){
+        if(err){console.log(err)}
+        Device
+        .findOne({devid: _data.devid})
+        .exec(function(err, device){
+          // device.data = [];
+          device.data.push(data._id);
+          device.save(function(err, device){
+            if(err){console.log(err)}
+            if(count<=0){
+              console.log('over');
+            }else{
+              count--;
+            }
+          })
+        })
+      })
+    })
+  })
 });
 
 //---------------------------

@@ -2,9 +2,14 @@ var User = require('../models/user');
 var _ = require('lodash');
 
 exports.login = function(req, res){
-  res.render('login', {
+  console.log(req.session.user);
+  if(req.session.user){
+    res.redirect('/');
+  }else{
+    res.render('login', {
 
-  });
+    });
+  }
 }
 
 exports.register = function(req, res){
@@ -33,10 +38,10 @@ exports.signin = function(req, res){
         User.update({_id: user._id}, {$inc: {loginCount: 1}}, function(err){
           if (err) {console.log(err);}
           console.log("login suc");
-          return res.redirect('/index');
+          return res.redirect('/');
         })
       }else{
-        return res.redirect('/index');
+        return res.redirect('/login');
       }
     })
   })
