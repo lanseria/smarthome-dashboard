@@ -15,7 +15,7 @@ var Device = require('./app/models/device');
 
 //-----------------------
 var option = {
-  host: "127.0.0.1",
+  host: "192.168.191.5",
   port: 7894
 }
 var network = require('./network/app.js').network;
@@ -107,4 +107,4 @@ require('./app/routes/index')(app);
 
 app.listen(port);
 
-console.log('smart-home started on port ' + port + ' http://127.0.0.1:' + port);
+console.log('smart-home started on port ' + port + ' http://localhost:' + port);

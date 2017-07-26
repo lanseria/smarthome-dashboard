@@ -1,6 +1,6 @@
 var net = require('net');
 var host = '127.0.0.1';
-var port = 7894;
+var port = 8080;
 
 var retryTimeout = 3000;    //三秒，定义三秒后重新连接  
 var retriedTimes = 0;   //记录重新连接的次数  
@@ -27,12 +27,31 @@ var client = net.connect(port, host, function(){
       },
       time: new Date()
     }
-    console.log(obj);
-    console.log(JSON.stringify(obj));
-    var buf = new Buffer(JSON.stringify(obj));
+    var parsePorto = require('lei-proto');
+    var Modelbuf = parsePorto([
+      ['stat', 'string', 4], // (STAT)
+      ['total_length', 'uint', 2], // (长度)
+      ['cmd', 'uint', 1], // （cmd）
+      ['netgateid', 'uint', 6], // （网关ID）
+      ['start_flag', 'uint', 1], 
+      ['module_count', 'uint', 1],
+      // 每个模块了
+      ['front', 'uint', 1],// （头）
+      ['sub_length', 'uint', 1],// （长度）
+      ['d_front', 'uint', 1],
+      ['d_type', 'uint', 2], //（设备类型） 
+      ['dev_id', 'uint', 6], // （设备ID）
+      ['data', 'uint', 1], //  (具体的数据)
+      ['sub_crc', 'uint', 1], //0E （crc）
+      ['end_flag', 'uint', 1], //CC    （模块数据）
+      //结束
+      ['total_crc', 'uint', 1], //33  CRC(总)
+      ['end', 'string', 3] //45 4E 44 （END） 
+    ])
+    var buf = Modelbuf.encode('STAT', 15, 1, 0, 187, 1, 170, 9, 187, 256, 1099511627776, 1, 14, 204, 51, 'END');
     //var buf = new Buffer(obj);
     client.write(buf);
-  }, 60000)
+  }, 1000)
 });
 (function connect(){
   client.on('data', function(data){

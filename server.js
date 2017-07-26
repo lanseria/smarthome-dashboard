@@ -1,6 +1,6 @@
 var option = {
   host: "127.0.0.1",
-  port: 7894
+  port: 8080
 }
 var network = require('./network/app.js').network;
 
@@ -8,6 +8,8 @@ var netserver = new network(option);
 
 netserver.start(function(err, server_data){
   console.info(server_data);
+
+
   /**
    * server_data里有硬件控制台的ID
    * 采集的数据datas
