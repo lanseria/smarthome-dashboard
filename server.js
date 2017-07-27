@@ -4,23 +4,34 @@ var option = {
 }
 var network = require('./network/app.js').network;
 
+var TcpBuffer = require('./bufferprocess/app.js');
+
 var netserver = new network(option);
-
+/**
+* 异常处理
+*/
+process.on('uncaughtException', function (err) {
+  console.error(err.stack);
+  console.log("Node NOT Exiting...");
+});
 netserver.start(function(err, server_data){
-  console.info(server_data);
-
-
-  /**
-   * server_data里有硬件控制台的ID
-   * 采集的数据datas
-   * 时间time
-   */
-  var cencontrol_id = 1;
-  var senor_datas = {
-    temperature: 30,
-    humidity: 75
-  };
-  var data_time = new Date();
-  //分析完成之后
-  
+  // console.info(server_data.data);
+  var tcpbuffer = new TcpBuffer({type: 'recv'});
+  // tcpbuffer.crc8Check(server_data.data);
+  // tcpbuffer.buildModel(server_data);
+  tcpbuffer.rolling(server_data.data);
+  // var obj  = { 
+  //   cmd: 1,
+  //   netgateid: new Buffer([00, 00, 00, 00, 00, 00]),
+  //   modules: [ { 
+  //       dType: new Buffer([01,00]),
+  //       devId: new Buffer([01, 00, 00, 00, 00, 00]),
+  //       data: 1 
+  //     } 
+  //   ] 
+  // };
+  // do something Emmm...
+  // var tcpbuffer = new TcpBuffer({type: 'send'});
+  // var data = tcpbuffer.setBuild(obj);
+  // this.send(client, data);
 });

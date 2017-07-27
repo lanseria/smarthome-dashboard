@@ -10,7 +10,7 @@ var ruid = require('./network/ruid.js').ruid;
 
 var client = net.connect(port, host, function(){
   console.log('Connected to the server.');
-  setInterval(function(){
+  setTimeout(function(){
     var obj = {
       cid: 1,
       data: {
@@ -32,23 +32,23 @@ var client = net.connect(port, host, function(){
       ['stat', 'string', 4], // (STAT)
       ['total_length', 'uint', 2], // (长度)
       ['cmd', 'uint', 1], // （cmd）
-      ['netgateid', 'uint', 6], // （网关ID）
-      ['start_flag', 'uint', 1], 
+      ['netgateid', 'buffer', 6], // （网关ID）
+      ['start_flag', 'buffer', 1], 
       ['module_count', 'uint', 1],
       // 每个模块了
-      ['front', 'uint', 1],// （头）
+      ['front', 'buffer', 1],// （头）
       ['sub_length', 'uint', 1],// （长度）
-      ['d_front', 'uint', 1],
-      ['d_type', 'uint', 2], //（设备类型） 
-      ['dev_id', 'uint', 6], // （设备ID）
+      ['d_front', 'buffer', 1],
+      ['d_type', 'buffer', 2], //（设备类型） 
+      ['dev_id', 'buffer', 6], // （设备ID）
       ['data', 'uint', 1], //  (具体的数据)
       ['sub_crc', 'uint', 1], //0E （crc）
-      ['end_flag', 'uint', 1], //CC    （模块数据）
+      ['end_flag', 'buffer', 1], //CC    （模块数据）
       //结束
       ['total_crc', 'uint', 1], //33  CRC(总)
       ['end', 'string', 3] //45 4E 44 （END） 
     ])
-    var buf = Modelbuf.encode('STAT', 15, 1, 0, 187, 1, 170, 9, 187, 256, 1099511627776, 1, 14, 204, 51, 'END');
+    var buf = Modelbuf.encode('STAT', 15, 1, new Buffer([00,00,00,00,00,00]), new Buffer([0xbb]), 1, new Buffer([0xaa]), 9, new Buffer([0xbb]), new Buffer([01,00]), new Buffer([01,00,00,00,00,00]), 1, 14, new Buffer([0xcc]), 51, 'END');
     //var buf = new Buffer(obj);
     client.write(buf);
   }, 1000)
